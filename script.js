@@ -44,16 +44,50 @@ const selecteds = sample(chordsTable, 4)
 const correct = pick(selecteds)
 console.log({selecteds, correct});
 
+function makeChords(pos) {
+
+    
+    const chords = [
+        mainDroite(pos),
+        '<u>E A D g b e</u>',
+    ]
+
+    const fretNums = pos.split('')
+        .map(c => parseInt(c, 10))
+        .filter(c => !isNaN(c))
+    const maxFret = (Math.max(...fretNums) > 2 ? Math.max(...fretNums) : 3)
+
+    for (let i = 1; i <= maxFret; i++) {
+        chords.push(frette(pos, i))
+        chords.push('|-|-|-|-|-|')
+    }
+
+    console.log(chords.join('\n'));
+    return chords.join('\n')
+}
+
+
+function mainDroite(pos) {
+    return pos.split('')
+        .map(c => c === 'X' || c === '0' ? c : ' ')
+        .join(' ')
+}
+function frette(pos, i) { 
+    return pos.split('')
+        .map(c => parseInt(c, 10) === i ? '<b>@</b>' : '|')
+        .join(' ')
+}
 
 document.querySelector('.accord').innerHTML = correct[pick(['name', 'engName'])]
 selecteds.forEach((item, i) => {
     const btn = document.querySelector(`.btn[data-value="${i}"]`)
-    btn.innerHTML = `<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
+    btn.innerHTML = "<pre class='prout'>" + makeChords(item.pos) + "</pre>"
+    //`<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
 })
 
 document.querySelector('body').addEventListener('click', e => {
-    if(e.target.classList.contains('btn')){
-        const value = parseInt(e.target.getAttribute('data-value'), 10)
+    if(e.target.classList.contains('prout')){
+        const value = parseInt(e.target.parentNode.getAttribute('data-value'), 10)
         const chosen = selecteds[value]
         console.log('button!', value, chosen);
 
