@@ -40,8 +40,8 @@ const chordsTable = [
 
 
 
-const selecteds = sample(chordsTable, 4)
-const correct = pick(selecteds)
+let selecteds = sample(chordsTable, 4)
+let correct = pick(selecteds)
 console.log({selecteds, correct});
 
 function makeChords(pos) {
@@ -77,13 +77,21 @@ function frette(pos, i) {
         .map(c => parseInt(c, 10) === i ? '<b>@</b>' : '|')
         .join(' ')
 }
+function encoreUneFois(){
+    document.querySelector('.accord').innerHTML = correct[pick(['name', 'engName'])]
+    selecteds.forEach((item, i) => {
+        const btn = document.querySelector(`.btn[data-value="${i}"]`)
+        btn.innerHTML = "<pre class='prout'>" + makeChords(item.pos) + "</pre>"
+        //`<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
+    })
+}
 
 document.querySelector('.accord').innerHTML = correct[pick(['name', 'engName'])]
-selecteds.forEach((item, i) => {
-    const btn = document.querySelector(`.btn[data-value="${i}"]`)
-    btn.innerHTML = "<pre class='prout'>" + makeChords(item.pos) + "</pre>"
-    //`<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
-})
+    selecteds.forEach((item, i) => {
+        const btn = document.querySelector(`.btn[data-value="${i}"]`)
+        btn.innerHTML = "<pre class='prout'>" + makeChords(item.pos) + "</pre>"
+        //`<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
+    })
 
 document.querySelector('body').addEventListener('click', e => {
     if(e.target.classList.contains('prout')){
@@ -93,9 +101,14 @@ document.querySelector('body').addEventListener('click', e => {
 
         document.querySelector('.result').innerHTML = chosen.pos === correct.pos ? 'WIN!!' : 'LOOSE :('
         
+    }else if(e.target.classList.contains('go')){
+        console.log('OH YEAYYY');
+        selecteds = sample(chordsTable, 4)
+        correct = pick(selecteds)
+        document.querySelector('.result').innerHTML = ""
+        encoreUneFois();
     }
 })
-
 
 
 function sample(arr, n){
