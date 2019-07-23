@@ -1,0 +1,14 @@
+{
+  "name": "chordsquizz",
+  "version": "1.0.0",
+  "description": "Do you know your chords ? ",
+  "main": "chordsQuizz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.0.1"
+  }
+}
