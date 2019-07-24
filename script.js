@@ -40,11 +40,6 @@ const chordsTable = [
         engName: 'G'
     },
     {
-        name: 'Solm',
-        pos: 'XX5333',
-        engName: 'Gm'
-    },
-    {
         name: 'Sol7',
         pos: '320001',
         engName: 'G7'
