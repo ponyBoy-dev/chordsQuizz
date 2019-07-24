@@ -10,9 +10,19 @@ const chordsTable = [
         engName: 'D'
     },
     {
+        name: 'Rém',
+        pos: 'XX0231',
+        engName: 'Dm'
+    },
+    {
         name: 'Mi',
         pos: '022100',
         engName: 'E'
+    },
+    {
+        name: 'Mim',
+        pos: '022000',
+        engName: 'Em'
     },
     {
         name: 'Fa',
@@ -20,9 +30,24 @@ const chordsTable = [
         engName: 'F'
     },
     {
+        name: 'Fam',
+        pos: 'XX3111',
+        engName: 'Fm'
+    },
+    {
         name: 'Sol',
         pos: '320003',
         engName: 'G'
+    },
+    {
+        name: 'Solm',
+        pos: 'XX5333',
+        engName: 'Gm'
+    },
+    {
+        name: 'Sol7',
+        pos: '320001',
+        engName: 'G7'
     },
     {
         name: 'La',
@@ -30,10 +55,14 @@ const chordsTable = [
         engName: 'A'
     },
     {
+        name: 'Lam',
+        pos: 'X02210',
+        engName: 'Am'
+    },
+    {
         name: 'SI7',
         pos: 'X21202',
         engName: 'B7',
-        'hello world': 3
     }
 ];
 
