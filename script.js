@@ -43,6 +43,9 @@ const chordsTable = [
 let selecteds = sample(chordsTable, 4)
 let correct = pick(selecteds)
 console.log({selecteds, correct});
+let goodAnswersCounter = 0 //pour le score
+let triesCounter = 0 //pour le score
+var buttonClickable = true
 
 function makeChords(pos) {
 
@@ -78,34 +81,56 @@ function frette(pos, i) {
         .join(' ')
 }
 function encoreUneFois(){
+    buttonClickable = true
     document.querySelector('.accord').innerHTML = correct[pick(['name', 'engName'])]
     selecteds.forEach((item, i) => {
         const btn = document.querySelector(`.btn[data-value="${i}"]`)
-        btn.innerHTML = "<pre class='prout'>" + makeChords(item.pos) + "</pre>"
+        btn.innerHTML = "<pre>" + makeChords(item.pos) + "</pre>"
         //`<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
     })
+    document.querySelector('.btn-container').style.display = 'block'
+    document.querySelector('.result-container').style.display = 'none'
 }
 
-document.querySelector('.accord').innerHTML = correct[pick(['name', 'engName'])]
-    selecteds.forEach((item, i) => {
-        const btn = document.querySelector(`.btn[data-value="${i}"]`)
-        btn.innerHTML = "<pre class='prout'>" + makeChords(item.pos) + "</pre>"
-        //`<img src="images/${item.pos}.png" alt="${item.pos}">`// item.pos
-    })
+function winning(){
+    goodAnswersCounter ++
+    triesCounter ++
+    document.querySelector('.goodAnswers').innerHTML = goodAnswersCounter
+    document.querySelector('.tries').innerHTML = triesCounter
+    document.querySelector('.btn-container').style.display = 'none'
+    document.querySelector('.result-container').style.display = 'block'
+    document.querySelector('.result-container').innerHTML = "<img src='victory.jpg' alt='VICTORY!'>"
+    
+}
+
+function losing(){
+    triesCounter ++
+    document.querySelector('.goodAnswers').innerHTML = goodAnswersCounter
+    document.querySelector('.tries').innerHTML = triesCounter
+    document.querySelector('.btn-container').style.display = 'none'
+    document.querySelector('.result-container').style.display = 'block'
+    document.querySelector('.result-container').innerHTML = '<table><tr><td><img height="250px" src="answer.jpg" alt="Here is the answer:"></td><td class="goodAnswerContainer"><pre>' + makeChords(correct.pos) + '</pre></td></tr></table>'
+}
+
+encoreUneFois()
+
 
 document.querySelector('body').addEventListener('click', e => {
-    if(e.target.classList.contains('prout')){
-        const value = parseInt(e.target.parentNode.getAttribute('data-value'), 10)
+    if(e.target.classList.contains('btn')){
+        if(!buttonClickable){
+            return
+        }
+        const value = parseInt(e.target.getAttribute('data-value'), 10)
         const chosen = selecteds[value]
         console.log('button!', value, chosen);
-
-        document.querySelector('.result').innerHTML = chosen.pos === correct.pos ? 'WIN!!' : 'LOOSE :('
-        
+        buttonClickable = false;
+        //document.querySelector('.result').innerHTML = chosen.pos === correct.pos ? 'WIN!!' : 'LOOSE :('
+        chosen.pos === correct.pos ? winning() : losing();
     }else if(e.target.classList.contains('go')){
         console.log('OH YEAYYY');
         selecteds = sample(chordsTable, 4)
         correct = pick(selecteds)
-        document.querySelector('.result').innerHTML = ""
+        //document.querySelector('.result').innerHTML = ""
         encoreUneFois();
     }
 })

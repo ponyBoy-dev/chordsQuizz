@@ -13,8 +13,12 @@
             background-color: greenyellow;
             padding:1em 2em;
             margin-top: 4px;
+            margin-bottom: 3px;
             font-family: 'Courier New', Courier, monospace;
             border-radius: 25px;
+        }
+        .btn pre{
+            pointer-events: none;
         }
         .go{
             height: 25px; 
@@ -26,19 +30,36 @@
             background-position-y: 50%;
             background-size: 15px;
             background-color: green;
+            margin-top: 4px;
     
+        }
+        .result-container{
+            display: none;
+        }
+        .goodAnswerContainer{
+            padding-left: 10px;
         }
     </style>
 </head>
 <body>
     <p>Quelle est la position correcte pour <b><span class="accord"></span></b> ?</p>
-    <button class="btn" data-value="0">1</button>
-    <button class="btn" data-value="1">2</button><br>
-    <button class="btn" data-value="2">3</button>
-    <button class="btn" data-value="3">4</button>
 
-    <h1 class="result"></h1>
+    <div class="btn-container">
+        <button class="btn" data-value="0">1</button>
+        <button class="btn" data-value="1">2</button><br>
+        <button class="btn" data-value="2">3</button>
+        <button class="btn" data-value="3">4</button>
+    </div>
+
+    <div class="result-container">
+        <h1 class="result"></h1>
+    </div>
+
     <button class="go"></button>
+    <div class='scoreBoard'>
+        <p><b>Your score: </b><span class="goodAnswers"></span> / <span class="tries"></span></p>
+    </div>
+        
     <script src="script.js"></script>
 </body>
 </html>
