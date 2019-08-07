@@ -1,0 +1,21 @@
+{
+    "short_name": "ChordsQ",
+    "name": "Chords Quizz",
+    "icons": [
+      {
+        "src": "icon192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "icon512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "https://ponyboy-dev.github.io/chordsQuizz/",
+    "background_color": "#adff2f",
+    "display": "standalone",
+    
+    "theme_color": "#adff2f"
+  }
